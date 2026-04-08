@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sudu ❤️</title>
+
+<style>
+body {
+  margin:0;
+  font-family:-apple-system, sans-serif;
+  background:#0b0b0b;
+  color:#fff;
+  text-align:center;
+  overflow:hidden;
+}
+
+.container {
+  padding:60px 25px;
+}
+
+h1 {
+  font-weight:500;
+  letter-spacing:1px;
+}
+
+p {
+  font-size:17px;
+  line-height:1.6;
+}
+
+#line1, #line2 {
+  opacity:0;
+}
+
+button {
+  margin-top:30px;
+  padding:10px 22px;
+  border:none;
+  border-radius:25px;
+  background:#ff4d6d;
+  color:white;
+  font-size:15px;
+  display:none;
+}
+
+#final {
+  display:none;
+  margin-top:30px;
+  line-height:1.9;
+  font-size:17px;
+  opacity:0;
+}
+
+#lastLine {
+  margin-top:30px;
+  font-size:18px;
+  opacity:0;
+  letter-spacing:0.5px;
+}
+
+.heart {
+  position:fixed;
+  bottom:-10px;
+  font-size:14px;
+  animation:floatUp 7s linear infinite;
+  opacity:0.6;
+}
+
+@keyframes floatUp {
+  0% { transform:translateY(0);}
+  100% { transform:translateY(-100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1 id="title"></h1>
+
+  <p id="line1"></p>
+  <p id="line2"></p>
+
+  <button id="btn" onclick="showFinal()">tap once 🥺</button>
+
+  <div id="final">
+    I’m really sorry.<br><br>
+    I’ll be better.<br><br>
+    I’ll take care of you.<br><br>
+    I won’t let you feel sad… I promise.<br><br>
+    You are my life.
+  </div>
+
+  <div id="lastLine">
+    please don’t give up on us.
+  </div>
+</div>
+
+<!-- 🎵 MUSIC -->
+<audio id="music" loop>
+  <source src="https://drive.google.com/uc?export=download&id=1JDreuj2o3zZ2NrBLBDfx611SRDmUurjI" type="audio/mpeg">
+</audio>
+
+<script>
+const titleText = "Sudu ❤️";
+const text1 = "I miss you, baby.";
+const text2 = "I hate that you're hurting because of me.";
+
+function typeWriter(text, element, speed, callback) {
+  let i = 0;
+  element.style.opacity = 1;
+
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    } else if (callback) {
+      setTimeout(callback, 900);
+    }
+  }
+  typing();
+}
+
+window.onload = () => {
+  typeWriter(titleText, document.getElementById("title"), 80, () => {
+    typeWriter(text1, document.getElementById("line1"), 50, () => {
+      typeWriter(text2, document.getElementById("line2"), 50, () => {
+        document.getElementById("btn").style.display = "inline-block";
+      });
+    });
+  });
+
+  // floating hearts
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.innerHTML = "❤️";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 7000);
+  }, 500);
+};
+
+function showFinal() {
+  let final = document.getElementById("final");
+  final.style.display = "block";
+
+  setTimeout(() => {
+    final.style.opacity = "1";
+  }, 100);
+
+  setTimeout(() => {
+    let last = document.getElementById("lastLine");
+    last.style.opacity = "1";
+  }, 2500);
+
+  // 🎵 PLAY MUSIC AFTER TAP
+  document.getElementById("music").play();
+}
+</script>
+
+</body>
+</html>
